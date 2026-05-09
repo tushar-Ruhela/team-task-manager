@@ -1,5 +1,5 @@
 import type { Request, Response, NextFunction } from "express";
-import prisma from "@ttm/db";
+import prisma from "../lib/prisma";
 import { hashPassword, comparePassword } from "../utils/password";
 import {
   signAccessToken,

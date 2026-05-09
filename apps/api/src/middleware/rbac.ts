@@ -1,5 +1,5 @@
 import type { Response, NextFunction } from "express";
-import prisma from "@ttm/db";
+import prisma from "../lib/prisma";
 import type { AuthRequest } from "./authenticate";
 
 /**

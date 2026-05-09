@@ -1,5 +1,5 @@
 import type { Response, NextFunction } from "express";
-import prisma from "@ttm/db";
+import prisma from "../lib/prisma";
 import { sendSuccess, sendError } from "../utils/response";
 import type { AuthRequest } from "../middleware/authenticate";
 import type { ProjectAuthRequest } from "../middleware/rbac";

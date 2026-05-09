@@ -1,5 +1,6 @@
 import type { Response, NextFunction } from "express";
-import prisma, { TaskStatus, TaskPriority } from "@ttm/db";
+import prisma from "../lib/prisma";
+import type { TaskStatus, TaskPriority } from "@prisma/client";
 import { sendSuccess, sendError } from "../utils/response";
 import type { AuthRequest } from "../middleware/authenticate";
 import type { CreateTaskInput, UpdateTaskInput } from "../schemas/task.schema";
