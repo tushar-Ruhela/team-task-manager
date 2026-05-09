@@ -1,9 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  transpilePackages: ["@ttm/types"],
-  env: {
-    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api",
+  // @ttm/types is a pure TypeScript types package — no transpilation needed
+  // It's resolved at build time via pnpm workspace
+  experimental: {
+    // Ensure workspace packages are bundled correctly
+    externalDir: true,
   },
 };
 

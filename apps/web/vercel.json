@@ -1,6 +1,7 @@
 {
   "framework": "nextjs",
-  "buildCommand": "cd ../.. && pnpm build --filter=@ttm/web",
-  "installCommand": "cd ../.. && pnpm install",
-  "outputDirectory": ".next"
+  "buildCommand": "pnpm --filter=@ttm/web build",
+  "installCommand": "pnpm install",
+  "outputDirectory": "apps/web/.next",
+  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- apps/web/ packages/"
 }
