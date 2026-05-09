@@ -62,13 +62,12 @@ app.use((_req, res) => {
 // Global error handler
 app.use(errorHandler);
 
-// ─── Start server only in local dev ──────────────────────────────────────────
-// Vercel serverless uses the exported `app` directly — no listen() needed.
-if (process.env.NODE_ENV !== "production") {
-  app.listen(PORT, () => {
-    console.log(`🚀 API server running on http://localhost:${PORT}`);
-    console.log(`📊 Health check: http://localhost:${PORT}/api/health`);
-  });
-}
+// ─── Start server ────────────────────────────────────────────────────────────
+// Always bind to PORT — Railway sets NODE_ENV=production automatically,
+// which previously caused app.listen() to be skipped entirely.
+app.listen(PORT, () => {
+  console.log(`🚀 API server running on port ${PORT}`);
+  console.log(`📊 Health check: http://localhost:${PORT}/api/health`);
+});
 
 export default app;
