@@ -2,8 +2,12 @@
 import React, {
   createContext, useContext, useState, useEffect, useCallback, ReactNode,
 } from "react";
+import axios from "axios";
 import api from "@/lib/api";
 import type { AuthUser } from "@ttm/types";
+
+const BASE_URL =
+  process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
 
 interface AuthContextType {
   user: AuthUser | null;
@@ -33,15 +37,24 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  // On mount: try to refresh token
+  // On mount: try to restore session via refresh token cookie.
+  // ✅ FIX: Use plain axios (not the intercepted `api` instance) so a 401
+  // here does NOT trigger the response interceptor's retry logic.
   useEffect(() => {
     const init = async () => {
       try {
-        const res = await api.post("/auth/refresh");
+        const res = await axios.post(
+          `${BASE_URL}/auth/refresh`,
+          {},
+          { withCredentials: true }
+        );
         const token = res.data.data.accessToken;
+        sessionStorage.setItem("access_token", token);
         setAccessToken(token);
         await fetchMe(token);
       } catch {
+        // No valid refresh token — user is not logged in, that's fine
+        sessionStorage.removeItem("access_token");
         setUser(null);
         setAccessToken(null);
       } finally {
@@ -54,6 +67,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const login = async (email: string, password: string) => {
     const res = await api.post("/auth/login", { email, password });
     const { user: u, accessToken: token } = res.data.data;
+    sessionStorage.setItem("access_token", token);
     setUser(u);
     setAccessToken(token);
   };
@@ -61,12 +75,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const signup = async (name: string, email: string, password: string, role = "MEMBER") => {
     const res = await api.post("/auth/signup", { name, email, password, role });
     const { user: u, accessToken: token } = res.data.data;
+    sessionStorage.setItem("access_token", token);
     setUser(u);
     setAccessToken(token);
   };
 
   const logout = async () => {
     try { await api.post("/auth/logout"); } catch {}
+    sessionStorage.removeItem("access_token");
     setUser(null);
     setAccessToken(null);
   };
