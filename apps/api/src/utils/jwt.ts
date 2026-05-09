@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import type { TokenPayload } from "@ttm/types";
+import type { TokenPayload } from "../types";
 
 const JWT_SECRET = process.env.JWT_SECRET || "fallback-secret";
 const JWT_REFRESH_SECRET =

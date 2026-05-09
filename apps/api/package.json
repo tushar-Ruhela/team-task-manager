@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "@prisma/client": "^5.14.0",
-    "@ttm/types": "workspace:*",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",

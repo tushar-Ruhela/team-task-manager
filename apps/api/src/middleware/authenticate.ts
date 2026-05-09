@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from "express";
 import { verifyAccessToken } from "../utils/jwt";
-import type { TokenPayload } from "@ttm/types";
+import type { TokenPayload } from "../types";
 
 export interface AuthRequest extends Request {
   user?: TokenPayload;
