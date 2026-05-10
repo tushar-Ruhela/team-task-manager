@@ -22,6 +22,10 @@ export default function LoginPage() {
 
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     resolver: zodResolver(schema),
+    defaultValues: {
+      email: "demo@taskflow.com",
+      password: "password123",
+    },
   });
 
   const onSubmit = async (data: FormData) => {
@@ -72,7 +76,7 @@ export default function LoginPage() {
 
         <div style={{ marginTop: 24, padding: 14, background: "var(--bg-elevated)", borderRadius: 10, border: "1px solid var(--border)" }}>
           <p style={{ fontSize: 12, color: "var(--text-muted)", marginBottom: 8, fontWeight: 600 }}>DEMO CREDENTIALS</p>
-          <p style={{ fontSize: 12, color: "var(--text-secondary)" }}>Sign up with any email to create your account</p>
+          <p style={{ fontSize: 12, color: "var(--text-secondary)" }}>Email: demo@taskflow.com<br/>Password: password123</p>
         </div>
       </div>
     </div>

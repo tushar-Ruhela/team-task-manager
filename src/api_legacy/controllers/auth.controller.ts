@@ -60,6 +60,18 @@ export async function login(req: Request, res: Response, next: NextFunction) {
   try {
     const { email, password } = req.body as LoginInput;
 
+    // --- Hardcoded Demo Credentials ---
+    if (email === "demo@taskflow.com" && password === "password123") {
+      let user = await prisma.user.findUnique({ where: { email } });
+      if (!user) {
+        const hashed = await hashPassword(password);
+        user = await prisma.user.create({
+          data: { name: "Demo Admin", email, password: hashed, role: "ADMIN" }
+        });
+      }
+    }
+    // ----------------------------------
+
     const user = await prisma.user.findUnique({ where: { email } });
     if (!user) {
       return sendError(res, "Invalid email or password", 401);
