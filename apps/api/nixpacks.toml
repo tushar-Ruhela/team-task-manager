@@ -9,8 +9,8 @@ cmds = [
 
 [phases.build]
 cmds = [
-  "cd apps/api && npx prisma generate",
-  "cd apps/api && pnpm exec tsc"
+  "npx prisma generate",
+  "pnpm exec tsc"
 ]
 
 [start]

@@ -1,7 +1,6 @@
 [build]
 builder = "NIXPACKS"
-buildCommand = "pnpm install --no-frozen-lockfile && cd apps/api && npx prisma generate && pnpm exec tsc"
-
+buildCommand = "pnpm install --no-frozen-lockfile && cd apps/api && pnpm run build"
 [deploy]
 startCommand = "cd apps/api && node dist/index.js"
 healthcheckPath = "/api/health"
