@@ -51,6 +51,14 @@ export default function LoginPage() {
           <p className="auth-subtitle">Sign in to your TaskFlow account</p>
         </div>
 
+        <div style={{ marginBottom: 24, padding: "12px 16px", background: "rgba(99, 102, 241, 0.1)", borderRadius: 8, border: "1px solid rgba(99, 102, 241, 0.2)" }}>
+          <p style={{ fontSize: 13, color: "var(--accent)", marginBottom: 4, fontWeight: 700 }}>🚀 Demo Credentials</p>
+          <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: 0 }}>
+            <strong>Email:</strong> demo@taskflow.com<br/>
+            <strong>Password:</strong> password123
+          </p>
+        </div>
+
         <form className="auth-form" onSubmit={handleSubmit(onSubmit)}>
           <div className="form-group">
             <label className="form-label">Email address</label>
@@ -74,10 +82,6 @@ export default function LoginPage() {
           <Link href="/signup" className="auth-link">Create one free</Link>
         </p>
 
-        <div style={{ marginTop: 24, padding: 14, background: "var(--bg-elevated)", borderRadius: 10, border: "1px solid var(--border)" }}>
-          <p style={{ fontSize: 12, color: "var(--text-muted)", marginBottom: 8, fontWeight: 600 }}>DEMO CREDENTIALS</p>
-          <p style={{ fontSize: 12, color: "var(--text-secondary)" }}>Email: demo@taskflow.com<br/>Password: password123</p>
-        </div>
       </div>
     </div>
   );
