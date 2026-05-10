@@ -118,7 +118,7 @@ export async function getProject(
 
     if (!project) return sendError(res, "Project not found", 404);
 
-    const myMembership = project.members.find((m) => m.userId === userId);
+    const myMembership = project.members.find((m: any) => m.userId === userId);
     return sendSuccess(res, {
       ...project,
       myRole: myMembership?.role ?? (req.user?.role === "ADMIN" ? "ADMIN" : null),
