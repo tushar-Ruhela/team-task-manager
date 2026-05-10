@@ -29,12 +29,8 @@ app.use(
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow server-to-server (no origin) and listed origins
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error(`CORS: origin ${origin} not allowed`));
-      }
+      // Always allow for unified Next.js app
+      callback(null, true);
     },
     credentials: true,
   })
